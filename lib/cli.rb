@@ -7,13 +7,13 @@ class CLI
     @calculator = Calculator.new
   end
 
-  def run
+  def prompt
     print_cursor
     handle_input(gets.chomp.strip)
     run
   rescue Calculator::UnrecognizedInputError
     puts "Unrecognized input '#{input}'"
-    run
+    prompt
   rescue StandardError
     puts 'Exiting'
     exit
