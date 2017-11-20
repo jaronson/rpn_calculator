@@ -9,7 +9,8 @@ class CLI
 
   def prompt
     print_cursor
-    handle_input(gets.chomp.strip)
+    input = gets.chomp.strip
+    handle_input(input)
     prompt
   rescue Calculator::UnrecognizedInputError
     puts "Unrecognized input '#{input}'"
