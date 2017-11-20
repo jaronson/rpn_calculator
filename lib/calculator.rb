@@ -15,15 +15,15 @@ class Calculator
 
   def handle_input(input)
     [].tap do |output|
-      input.split(' ').each do |part|
-        handle_part(part)
+      input.to_s.split(' ').each do |part|
+        handle_part(part, output)
       end
     end
   end
 
   private
 
-  def handle_part(part)
+  def handle_part(part, output)
     case part
     when MATCHERS[:integer]
       @stack.push(part.to_i)
