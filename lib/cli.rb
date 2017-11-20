@@ -15,8 +15,7 @@ class CLI
     puts "Unrecognized input '#{input}'"
     prompt
   rescue StandardError
-    puts 'Exiting'
-    exit
+    print_exit
   end
 
   private
@@ -24,6 +23,8 @@ class CLI
   def handle_input(input)
     if input == 'clear'
       system('clear')
+    elsif input == 'q'
+      print_exit
     else
       output = calculator.handle_input(input)
 
@@ -35,5 +36,10 @@ class CLI
 
   def print_cursor
     print "> "
+  end
+
+  def print_exit
+    puts "Exiting\n"
+    exit
   end
 end
