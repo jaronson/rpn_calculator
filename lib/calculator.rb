@@ -1,6 +1,12 @@
 class Calculator
   UnrecognizedInputError = Class.new(StandardError)
 
+  MATCHERS = {
+    integer:  /^-?\d+$/,
+    float:    /^-?[0-9]+(\.[0-9]+)?$/,
+    operator: /^[-+\/*]$/
+  }.freeze
+
   attr_reader :stack
 
   def initialize
@@ -19,13 +25,13 @@ class Calculator
 
   def handle_part(part)
     case part
-    when /^-?\d+$/
+    when MATCHERS[:integer]
       @stack.push(part.to_i)
-    when /^-?[0-9]+(\.[0-9]+)?$/
+    when MATCHERS[:float]
       @stack.push(part.to_f)
-    when /^[-+\/*]$/
+    when MATCHERS[:operator]
       output.push(operate(part))
-    when /^state$/
+    when /^state$/ # state command, just inspect the stack
       output.push(@stack.inspect)
     else
       raise UnrecognizedInputError.new
